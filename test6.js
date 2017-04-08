@@ -87,6 +87,10 @@ function getImageList (done) {
                     })
                     // 下载图片
                     async.forEach(photosr, function (item, downloadImgCallback) {
+                        // 处理一下链接不存在的可能
+                        if (!item) {
+                            return downloadImgCallback();
+                        }
                         var imgsrc = 'http://www.xiaohuar.com' + item;
                         var filename = parseUrlForFileName(imgsrc);
                         downloadImg(imgsrc, filename, function () {
